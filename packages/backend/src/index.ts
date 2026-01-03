@@ -4,6 +4,8 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import { db, redis } from './database/connection';
+import authRoutes from './routes/auth';
+import itineraryRoutes from './routes/itineraries';
 
 // Load environment variables
 dotenv.config();
@@ -43,6 +45,10 @@ app.get('/health', async (req, res) => {
     });
   }
 });
+
+// API routes
+app.use('/api/auth', authRoutes);
+app.use('/api/itineraries', itineraryRoutes);
 
 // API routes placeholder
 app.get('/api', (req, res) => {
